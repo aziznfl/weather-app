@@ -2,10 +2,12 @@
 
 Overview
 
-![Image0](https://drive.usercontent.google.com/download?id=12wXsmpnU6R92vHZCuhInC5-qJ-cegkmu)
-![Image1](https://drive.usercontent.google.com/download?id=1N9md_BccYgwhRYWB7Q6ejrTbj3FATJs4)
-![Image2](https://drive.usercontent.google.com/download?id=1txDt6tXomRV5RDPZhIxrmKg-8te8mjlf)
-![Image3](https://drive.usercontent.google.com/download?id=1dguoVM7uF0h7VuF-oiLVrLAPbNBtjY0y)
+<p align="center">
+  <img src="https://drive.usercontent.google.com/download?id=12wXsmpnU6R92vHZCuhInC5-qJ-cegkmu" width="22%" />
+  <img src="https://drive.usercontent.google.com/download?id=1N9md_BccYgwhRYWB7Q6ejrTbj3FATJs4" width="22%" />
+  <img src="https://drive.usercontent.google.com/download?id=1txDt6tXomRV5RDPZhIxrmKg-8te8mjlf" width="22%" />
+  <img src="https://drive.usercontent.google.com/download?id=1dguoVM7uF0h7VuF-oiLVrLAPbNBtjY0y" width="22%" />
+</p>
 
 This project is an iOS application that demonstrates how to build a widget-like UI inside a main app and share the same UI and data with a real WidgetKit extension.
 
