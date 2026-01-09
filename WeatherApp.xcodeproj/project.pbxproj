@@ -624,7 +624,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G59FPGXEVL;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CurrentWeather/Info.plist;
+				INFOPLIST_FILE = CurrentWeatherWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CurrentWeather;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
@@ -658,7 +658,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G59FPGXEVL;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CurrentWeather/Info.plist;
+				INFOPLIST_FILE = CurrentWeatherWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CurrentWeather;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;

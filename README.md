@@ -2,6 +2,8 @@
 
 Overview
 
+![Image0](https://drive.usercontent.google.com/download?id=12wXsmpnU6R92vHZCuhInC5-qJ-cegkmu)
+
 This project is an iOS application that demonstrates how to build a widget-like UI inside a main app and share the same UI and data with a real WidgetKit extension.
 
 The app focuses on a single screen that displays weather information in three different card sizes—Small, Medium, and Large—similar to real iOS widgets. The project is designed with scalability in mind, using Clean Architecture and MVVM.
