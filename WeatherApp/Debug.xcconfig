@@ -1,0 +1,8 @@
+//
+//  Debug.xcconfig
+//  WeatherApp
+//
+//  Created by Aziz Nurfalah on 02/01/26.
+//
+
+WEATHER_API_KEY = 0818760b15a6adb7afc92f861f692a14 // bd5e378503939ddaee76f12ad7a97608
