@@ -7,12 +7,8 @@
 
 import Alamofire
 
-protocol WeatherService {
-    func getCurrentWeather(body: WeatherRequest) async -> Result<WeatherResponse, BaseError>
-}
-
-final class WeatherServiceImpl: WeatherService {
-    static let shared: WeatherRepositoryImpl = WeatherRepositoryImpl()
+final class WeatherService: WeatherServiceProtocol {
+    static let shared: WeatherService = WeatherService()
     
     private let apiClient: APIClient
     

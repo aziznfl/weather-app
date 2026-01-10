@@ -5,15 +5,15 @@
 //  Created by Aziz Nurfalah on 02/01/26.
 //
 
-import Alamofire
+import Foundation
 
-final class WeatherRepositoryImpl: WeatherRepository {
-    static let shared: WeatherRepositoryImpl = WeatherRepositoryImpl()
+final class WeatherRepository: WeatherRepositoryProtocol {
+    static let shared: WeatherRepository = WeatherRepository()
     
-    private let service: WeatherService
+    private let service: WeatherServiceProtocol
     private let local: WeatherLocalDataSource
     
-    init(service: WeatherService = WeatherServiceImpl(),
+    init(service: WeatherServiceProtocol = WeatherService(),
          local: WeatherLocalDataSource = .shared) {
         self.service = service
         self.local = local
@@ -38,10 +38,6 @@ final class WeatherRepositoryImpl: WeatherRepository {
                 location: WeatherLocation(
                     name: weatherDto.name,
                     countryCode: weatherDto.sys.country
-                ),
-                temperature: Temperature(
-                    actual: weatherDto.main.temp,
-                    feelsLike: weatherDto.main.feelsLike
                 )
             )
             

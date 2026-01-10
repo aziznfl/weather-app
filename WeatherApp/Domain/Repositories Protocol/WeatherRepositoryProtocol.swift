@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol WeatherRepository {
+protocol WeatherRepositoryProtocol {
     func getCurrentWeatherFrom(location: Location) async -> Result<Weather, BaseError>
     func getCachedWeather() async -> Weather?
     func save(weather: Weather) async

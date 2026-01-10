@@ -9,32 +9,28 @@ import CoreLocation
 import UIKit
 
 final class HomeViewController: UIViewController {
-    
+
     @IBOutlet internal weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var changeBackgroundButton: UIView!
-    
-    private lazy var errorView: ErrorView = {
-        let view: ErrorView = ErrorView.loadFromNib()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
+
+    var errorView: ErrorView!
+    var alertFactory: LocationPermissionAlertFactory!
     var viewModel: HomeViewModel!
-    
+
     internal var items: [WeatherCardItem] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         setupHeader()
         setupCollectionView()
         setupErrorView()
-        
         bindViewModel()
-        
-        viewModel.initCurrentWeather()
+
+        viewModel.start()
     }
-    
+
     private func setupHeader() {
         title = "Weather App"
     }
@@ -65,6 +61,7 @@ final class HomeViewController: UIViewController {
     private func setupErrorView() {
         view.addSubview(errorView)
 
+        errorView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             errorView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             errorView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
@@ -74,69 +71,47 @@ final class HomeViewController: UIViewController {
     
     private func bindViewModel() {
         viewModel.onCurrentWeatherLoaded = { [weak self] weather in
-            guard let self else { return }
-            
-            let locationName = "\(weather.location.name), \(weather.location.countryCode)"
-            
-            self.items = [
-                WeatherCardItem(
-                    size: .small,
-                    type: weather.type,
-                    location: locationName
-                ),
-                WeatherCardItem(
-                    size: .medium,
-                    type: weather.type,
-                    location: locationName
-                ),
-                WeatherCardItem(
-                    size: .large,
-                    type: weather.type,
-                    location: locationName
-                )
-            ]
-            
-            collectionView.isHidden = false
-            pageControl.isHidden = false
-            changeBackgroundButton.isHidden = false
-            errorView.isHidden = true
-            
-            pageControl.numberOfPages = items.count
-            pageControl.currentPage = 0
-            
-            collectionView.reloadData()
-            collectionView.layoutIfNeeded()
+            self?.render(weather: weather)
         }
 
         viewModel.onError = { [weak self] error in
-            guard let self else { return }
-            if error.statusCode == 424 {
-                showLocationPermissionDialog()
-                
-                collectionView.isHidden = true
-                pageControl.isHidden = true
-                changeBackgroundButton.isHidden = true
-            }
-            
-            errorView.setup(label: error.message)
-            errorView.isHidden = false
+            self?.render(error: error)
         }
     }
     
-    private func showLocationPermissionDialog() {
-        let alert = UIAlertController(
-            title: "Location Permission Needed",
-            message: "Please enable location access in Settings to get your current weather.",
-            preferredStyle: .alert
+    private func render(error: BaseError) {
+        if error.statusCode == 424 {
+            let alert = alertFactory.makeAlert(
+                settingsHandler: goToSettings
+            )
+            present(alert, animated: true)
+
+            collectionView.isHidden = true
+            pageControl.isHidden = true
+            changeBackgroundButton.isHidden = true
+        }
+
+        errorView.setup(label: error.message)
+        errorView.isHidden = false
+    }
+    
+    private func render(weather: Weather) {
+        let locationName = "\(weather.location.name), \(weather.location.countryCode)"
+
+        items = WeatherCardItem.makeAll(
+            type: weather.type,
+            location: locationName
         )
 
-        let closeAction = UIAlertAction(title: "Close", style: .cancel)
-        let settingsAction = UIAlertAction(title: "Go to Settings", style: .default, handler: goToSettings)
+        collectionView.isHidden = false
+        pageControl.isHidden = false
+        changeBackgroundButton.isHidden = false
+        errorView.isHidden = true
 
-        alert.addAction(closeAction)
-        alert.addAction(settingsAction)
+        pageControl.numberOfPages = items.count
+        pageControl.currentPage = 0
 
-        present(alert, animated: true)
+        collectionView.reloadData()
     }
     
     // MARK: - Actions

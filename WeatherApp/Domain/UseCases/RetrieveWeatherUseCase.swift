@@ -7,13 +7,13 @@
 
 import WidgetKit
 
-final class RetrieveWeatherUseCase {
-    private let locationRepository: LocationRepository
-    private let weatherRepository: WeatherRepository
+final class RetrieveWeatherUseCase: RetrieveWeatherUseCaseProtocol {
+    private let locationRepository: LocationRepositoryProtocol
+    private let weatherRepository: WeatherRepositoryProtocol
     
     init(
-        locationRepository: LocationRepository = LocationRepositoryImpl(),
-        weatherRepository: WeatherRepository = WeatherRepositoryImpl.shared
+        locationRepository: LocationRepositoryProtocol,
+        weatherRepository: WeatherRepositoryProtocol
     ) {
         self.locationRepository = locationRepository
         self.weatherRepository = weatherRepository

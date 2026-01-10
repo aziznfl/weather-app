@@ -7,10 +7,12 @@
 
 import CoreLocation
 
-final class LocationRepositoryImpl: LocationRepository {
-    private let service: LocationService
+final class LocationRepository: LocationRepositoryProtocol {
+    static let shared: LocationRepository = LocationRepository()
     
-    init(service: LocationService = LocationServiceImpl()) {
+    private let service: LocationServiceProtocol
+    
+    init(service: LocationServiceProtocol = LocationService.shared) {
         self.service = service
     }
     

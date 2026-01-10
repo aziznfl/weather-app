@@ -15,7 +15,6 @@ struct Weather: Codable {
     let id: Int
     let type: WeatherType
     let location: WeatherLocation
-    let temperature: Temperature
 }
 
 struct WeatherLocation: Codable {

@@ -21,11 +21,9 @@ enum LocationError: LocalizedError {
     }
 }
 
-protocol LocationService {
-    func getCurrentLocation() async -> Result<CLLocationCoordinate2D, Error>
-}
-
-final class LocationServiceImpl: NSObject, LocationService {
+final class LocationService: NSObject, LocationServiceProtocol {
+    static let shared: LocationService = LocationService()
+    
     private let locationManager = CLLocationManager()
     private var continuation: CheckedContinuation<Result<CLLocationCoordinate2D, Error>, Never>?
     
@@ -64,7 +62,7 @@ final class LocationServiceImpl: NSObject, LocationService {
     }
 }
 
-extension LocationServiceImpl: CLLocationManagerDelegate {
+extension LocationService: CLLocationManagerDelegate {
     func locationManager(
         _ manager: CLLocationManager,
         didChangeAuthorization status: CLAuthorizationStatus
